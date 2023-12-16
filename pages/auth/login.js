@@ -19,6 +19,7 @@ const Login = () => {
       username: e.currentTarget.username.value,
       password: e.currentTarget.password.value,
     };
+    console.log("body ",body)
 
     try {
       const res = await fetch("/api/auth/login", {
