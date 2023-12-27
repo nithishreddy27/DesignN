@@ -1,0 +1,81 @@
+.homeflex {
+    display: flex;
+  }
+  
+  .home {
+    margin-left: 50px;
+    width: 80%;
+  }
+  
+  .homehead {
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-size: 30px;
+    color: white;
+  }
+  
+  .homehead2 {
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-size: 20px;
+    color: white;
+  }
+  
+  .upload {
+    width: 360px;
+    height: 96px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    /* Hotel/Hotel Button */
+    background: white;
+    margin-top: 100px;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    color: #001b1c;
+  }
+  
+  .box1 {
+    margin-top: 100px;
+  }
+  
+  .file {
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 20px;
+    color: black;
+  }
+  
+  .cloud {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .home_text {
+    color: black;
+  }
+  
+  .head {
+    color: white;
+    font-size: 30px;
+    font-family: "Nunito Sans";
+    font-style: normal;
+  }
+  
+  .head2 {
+    color: white;
+    font-size: 30px;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-top: 100px;
+  }

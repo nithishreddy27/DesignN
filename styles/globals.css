@@ -12,10 +12,64 @@
 
 html {
   scroll-behavior: smooth;
+  /* background-color: black; */
+
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  color: white;
+}
+
+.input {
+  width: 90%;
+  height: 64px;
+  border: 1px solid white;
+  border-radius: 8px;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: 25px;
+  color: #828282;
+  background-color: transparent;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.form {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+}
+
+.but {
+  width: 254px;
+  height: 64px;
+  margin-top: 50px;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: #001b1c;
+  background: white;
+  border: none;
+}
+
+.white {
+  color: white;
+  margin-bottom: 50px;
 }
 
 .background {
-  background-image: url("https://qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.home_page_bg_desktop.png-26-4770753d59b970e1.png");
+  /* background-image: url("https://qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.home_page_bg_desktop.png-26-4770753d59b970e1.png"); */
+
+  /* background-image: "bg-gradient-to-r from-cyan-500 to-blue-500"; */
   width: 100%;
   position: absolute;
   min-height: 100%;
@@ -27,6 +81,13 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
+.button-transition {
+  /* Other styles */
+  transition: background-color 0.3s ease-in-out;
+}
+
 
 /* Markdown styles */
 .markdown > ul {

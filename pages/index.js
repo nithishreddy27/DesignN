@@ -11,6 +11,8 @@ import { findUser } from "../src/lib/user";
 const Index = () => {
   return (
     <>
+
+    {/* {console.log("enc " ,process.env.DATABASE_URL)} */}
       <NextSeo
         title='Provast'
         description='This example uses more of the available config options.'

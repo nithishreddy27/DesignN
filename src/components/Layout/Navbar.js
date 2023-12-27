@@ -165,7 +165,7 @@ export const Navbar = () => {
           <Link href={"/"} passHref>
             <div className='w-44 h-[10vh] flex items-center p-2'>
               <div className='relative h-full w-full object-cover rounded-md cursor-pointer'>
-                <Image
+                {/* <Image
                   placeholder='blur'
                   blurDataURL='https://res.cloudinary.com/dj7nomqfd/image/upload/v1652909540/pvast_B_fpwhlu.png'
                   layout='fill'
@@ -173,7 +173,8 @@ export const Navbar = () => {
                   className=''
                   src='https://res.cloudinary.com/dj7nomqfd/image/upload/v1652909540/pvast_B_fpwhlu.png'
                   alt=""
-                />
+                /> */}
+                < p className="text-xl font-semibold font-serif mt-[12px]">Design Nation</p>
               </div>
             </div>
           </Link>

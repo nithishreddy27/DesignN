@@ -1,0 +1,32 @@
+.sidebar {
+    font-size: 48px;
+    background: #00008c;
+    width: 200px;
+    height: auto;
+    min-height: 100vh;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    padding-top: 100px;
+  }
+  
+  .item {
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-size: 24px;
+    padding: 30px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .rm {
+    text-decoration: none;
+  }
+  
+  .log {
+    color: red;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-size: 24px;
+    padding: 30px;
+    cursor: pointer;
+  }

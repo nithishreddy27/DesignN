@@ -1,8 +1,12 @@
 import crypto from "crypto";
 import Payment from "../../../models/Payment";
 import connectDB from "../../../src/lib/connectDB";
+import Documentation from "../../../models/Documentation";
 
 export default async function handler(req, res) {
+  const filteredPDFFiles = req.body.allPDFFiles.shift();
+  console.log("insied verfication ",req.body.allPDFFiles)
+
   switch (req.method) {
     case "PUT":
       await verifyAndUpdateOrder(req, res);
@@ -29,7 +33,7 @@ const verifyAndUpdateOrder = async (req, res) => {
     if (digest === razorpay_signature) {
       
     
-      console.log("body inside api ",req.body)
+      // console.log("body inside api ",req.body)
       const paymentDetails = await Payment.findOne({user:req.body.userId})
       const existPayment = {
         date : now,
@@ -75,7 +79,7 @@ const verifyAndUpdateOrder = async (req, res) => {
       try{
 
         if (paymentDetails) {
-          console.log("body inside payment details ",existPayment)  
+         
           const arr = []
           
           paymentDetails.history.map((item)=>{
@@ -83,26 +87,42 @@ const verifyAndUpdateOrder = async (req, res) => {
           })
           arr.push(existPayment);
           await Payment.findOneAndUpdate({user:req.body.userId},{$set:{history:arr}});
-          console.log("created ")     
+
       } else {
         console.log("body inside new details ",newPayment)  
 
         await newPayment.save()
 
-        console.log("created ")     
+        // console.log("created " , req.body)     
 
       }
 
 
-      if(req.body.fileName){
-        console.log("inside documentation ",req.body.fileName )
+    
+        // console.log("inside documentation ")
         const document = new Documentation({ 
           user: req.body.userId,
           paid: true,
-          filePath : "https://www.dropbox.com/preview/Apps/designnation"+req.body.fileName
+          amount:req.body.amount,
+          address:{
+            college : req.body.address.college,
+            line:req.body.address.line,
+            area:req.body.address.area,
+            city:req.body.address.city,
+            state: req.body.address.state,
+            country:req.body.address.country
+          },
+          filePath:req.body.allPDFFiles,
+          orderId : req.body.razorpay_order_id,
+          email : req.body.email,
+          phone : req.body.phone,
+          date : now,
+          
+         
         })
+        // console.log("inside documentation ",document)
         await document.save()
-      }
+      
       
       
       return res.status(200).json({ message: "Payment Successfull" });

@@ -1,48 +1,64 @@
-import Image from "next/image"
-import Link from "next/link"
-// import ExpandingArrow from "@/components/expanding-arrow"
-// import Uploader from "@/components/uploader"
-import { Toaster } from "react-hot-toast"
-import ExpandingArrow from "../../../../src/components/expanding-arroow"
-import Uploader from "../../../../src/components/uploader"
-// import { Toaster } from "@/components/toaster"
+import React, { useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
 
-export default function Home() {
-  return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center">
-      <Toaster />
-      
-      <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
-        Blob on Vercel
-      </h1>
-      <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
-        <Uploader />
-      </div>
-     
-      {/* <div className="sm:absolute sm:bottom-0 w-full px-20 py-10 flex justify-between">
-        <Link href="https://vercel.com">
-          <Image
-            src="/vercel.svg"
-            alt="Vercel Logo"
-            width={100}
-            height={24}
-            priority
-          />
-        </Link>
-        <Link
-          href="https://github.com/vercel/examples/tree/main/storage/blob-starter"
-          className="flex items-center space-x-2"
-        >
-          <Image
-            src="/github.svg"
-            alt="GitHub Logo"
-            width={24}
-            height={24}
-            priority
-          />
-          <p className="font-light">Source</p>
-        </Link>
-      </div> */}
-    </main>
-  )
+export default function PDFUpload() {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    const [pdfFile, setPdfFile] = useState(null);
+    const [pdfUrl, setPdfUrl] = useState('');
+    const [numPages, setNumPages] = useState(null);
+
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setPdfFile(file);
+            setPdfUrl('');
+        }
+    };
+
+    const handleUrlInput = (event) => {
+        const url = event.target.value;
+        setPdfUrl(url);
+        setPdfFile(null);
+    };
+
+    const fetchPdfFromUrl = async () => {
+        try {
+            const response = await fetch(pdfUrl);
+            const blob = await response.blob();
+            setPdfFile(blob);
+        } catch (error) {
+            console.error('Error fetching PDF from URL:', error);
+        }
+    };
+
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setNumPages(numPages);
+    };
+
+    return (
+        <div className="mt-24">
+            <input type="file" onChange={handleFileUpload} />
+            <input
+                type="text"
+                placeholder="Enter PDF URL"
+                value={pdfUrl}
+                onChange={handleUrlInput}
+            />
+            <button onClick={fetchPdfFromUrl}>Fetch PDF</button>
+
+            {pdfFile && (
+                <div>
+                    <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
+                        {/* Render PDF pages */}
+                    </Document>
+                </div>
+            )}
+
+            {pdfFile && numPages && (
+                <div>
+                    Number of Pages: {numPages}
+                </div>
+            )}
+        </div>
+    );
 }

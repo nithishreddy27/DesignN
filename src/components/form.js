@@ -4,13 +4,13 @@ import Link from "next/link";
 
 const Form = ({ isLogin, errorMessage, onSubmit }) =>{
   return  (
-    <div className='background min-h-[100vh] bg-gray-50 w-full flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8'>
+    <div className=' bg-gradient-to-r from-gray-800 to-black min-h-[100vh] bg-gray-50 w-full flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-        <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+        <div className='bg-white py-8 px-4  shadow sm:rounded-lg sm:px-10'>
           <div className='sm:mx-auto sm:w-full sm:max-w-md'>
             <div className='relative w-48 h-16 mx-auto cursor-pointer'>
               <Link href={"/"}>
-                <Image
+                {/* <Image
                   placeholder='blur'
                   blurDataURL='https://res.cloudinary.com/dj7nomqfd/image/upload/v1652909540/pvast_B_fpwhlu.png'
                   layout='fill'
@@ -18,7 +18,8 @@ const Form = ({ isLogin, errorMessage, onSubmit }) =>{
                   className=''
                   src='https://res.cloudinary.com/dj7nomqfd/image/upload/v1652909540/pvast_B_fpwhlu.png'
                   alt=''
-                />
+                /> */}
+               <p className="text-black text-center text-2xl"> Design Nation</p>
               </Link>
             </div>
             <h2 className='text-center text-2xl font-bold text-gray-900'>
@@ -37,7 +38,7 @@ const Form = ({ isLogin, errorMessage, onSubmit }) =>{
                   type='email'
                   autoComplete='email'
                   required
-                  className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
+                  className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm'
                 />
               </div>
             </div>
@@ -54,7 +55,7 @@ const Form = ({ isLogin, errorMessage, onSubmit }) =>{
                   autoComplete='current-password'
                   required
            
-                  className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
+                  className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm'
                 />
               </div>
             </div>
@@ -71,7 +72,7 @@ const Form = ({ isLogin, errorMessage, onSubmit }) =>{
                     type='password'
                     autoComplete='current-password'
                     required
-                    className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm'
+                    className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm'
                   />
                 </div>
               </div>
@@ -87,7 +88,7 @@ const Form = ({ isLogin, errorMessage, onSubmit }) =>{
   
                 <div className='text-sm'>
                   <Link href={"/auth/forgotpassword"}>
-                    <a className='font-medium text-orange-600 hover:text-orange-500'>
+                    <a className='font-medium text-gray-800 hover:text-black'>
                       Forgot your password?
                     </a>
                   </Link>
@@ -105,7 +106,7 @@ const Form = ({ isLogin, errorMessage, onSubmit }) =>{
             <div>
               <button
                 type='submit'
-                className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer focus:ring-orange-500'
+                className='w-full flex  justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-black hover:font-semibold to-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer focus:ring-gray-800'
               >
                 {isLogin ? "Log in" : "Sign up"}
               </button>

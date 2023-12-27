@@ -10,13 +10,25 @@ import { getLoginSession } from "../../../src/lib/auth";
 import { findUser } from "../../../src/lib/user";
 import { toast } from "react-toastify";
 import { useResumeContext } from "../../../src/context/ResumeContext";
+import { DropDown } from "../../../src/components/Reusables/Dropdown";
   
 
 const CheckoutSlug = ({ userDetails, id }) => {
   const session = JSON.parse(userDetails);
   // var { payment, isError, isLoading } = usePlan(session._id);
   const date = new Date()
-  const {pages , setpages , fileName , numberOfColor , numberOfBW}  = useResumeContext();
+  const {pages , money , allPDFFiles}  = useResumeContext();
+ 
+  console.log('setAllPDFFiles ',allPDFFiles)
+
+
+  const collegeList = [
+    { name: "CVR COLLEGE OF ENGINEERING", code: "cvr" },
+    { name: "VNR ", code: "vnr" },
+    { name: "mvsr", code: "mvsr" },
+  ];
+  
+  const [selectedCollege, setSelectedCollege] = useState(collegeList[0]);
   
   const [amount, setAmount] = useState()
   const router = useRouter();
@@ -26,6 +38,7 @@ const CheckoutSlug = ({ userDetails, id }) => {
   const [phone, setPhone] = useState("");
   const [coupon, setCoupon] = useState("");
   const [address, setAddress] = useState({
+    college:"",
     line: "",
     area:"",
     city:"",
@@ -35,23 +48,16 @@ const CheckoutSlug = ({ userDetails, id }) => {
 
 
   useEffect(()=>{
-  console.log("file name :" ,fileName)
-  },[fileName])
+    if(money){
+
+      setAmount(money)
+    }
+  },[money])
+
+
   useEffect(()=>{
-    console.log("insdie  if",numberOfBW , numberOfColor)
-    if(numberOfBW && numberOfColor){
-      setAmount(numberOfBW*3 + numberOfColor*5)
-    }
-    else if(numberOfBW == 0){
-      setAmount( numberOfColor*5)
-    }
-    else if(numberOfColor == 0){
-      setAmount(numberOfBW*3 )
-    }
-    else{
-      console.log("insied else")
-    }
-  },[numberOfColor , numberOfBW])
+    setAddress({ ...address, college: selectedCollege.code })
+  },[selectedCollege])
 
   const createOrder = async (a) => {
     const finalAmount = amount
@@ -129,11 +135,11 @@ const CheckoutSlug = ({ userDetails, id }) => {
               email,
               address,
               phone,
-              fileName
+              allPDFFiles
             });
             if (message == "Payment Successfull") {
               toast.success(message, { toastId: message });
-              router.push(`/db`);
+              router.push(`/dashboard/individual/documentation/order`);
             } else toast.error(message, { toastId: message });
           
         }
@@ -200,10 +206,7 @@ const CheckoutSlug = ({ userDetails, id }) => {
             </ol>
           </nav>
           <div className='my-5'>
-            <h1 className='block text-lg font-medium text-gray-800'>Payment Details</h1>
-            <p className='text-sm font-semibold text-gray-500 mb-3'>
-              Complete your purchase by providing your payment information.
-            </p>
+           
             {step === "personal" && (
               <div data-aos='fade-left' className='sm:col-span-4 my-4'>
                 <div>
@@ -261,6 +264,21 @@ const CheckoutSlug = ({ userDetails, id }) => {
                   Please enter your Country and Post/ ZIP Code below. We collect this information to
                   help combat fraud, and to keep your payment secure.
                 </p> */}
+                <div className='sm:col-span-3 mt-4'>
+                  <label htmlFor='line' className='block text-lg font-medium text-gray-500'>
+                    College Name
+                  </label>
+                  <div className='mt-1'>
+                  <DropDown
+                        isRequired
+                        title="College"
+                        options={collegeList}
+                        selectedOption={selectedCollege}
+                        setSelectedOption={setSelectedCollege}
+                      />
+                    {/* <input type="text" value={address.line} onChange={(e) => setAddress({ ...address, line: e.target.value })} /> */}
+                  </div>
+                </div>
                 <div className='sm:col-span-3 mt-4'>
                   <label htmlFor='line' className='block text-lg font-medium text-gray-500'>
                     Address Line One
